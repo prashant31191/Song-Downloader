@@ -68,6 +68,24 @@
             android:paddingBottom="10dp"
             android:src="@drawable/recents_frag_icon" />
 
+        <RelativeLayout
+            android:id="@+id/rlAds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.2"
+            android:minHeight="50dp"
+
+            android:gravity="center"
+            android:layout_centerHorizontal="true"/>
+        <RelativeLayout
+            android:id="@+id/rlAdsTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@drawable/transparent_gradient"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"/>
+
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

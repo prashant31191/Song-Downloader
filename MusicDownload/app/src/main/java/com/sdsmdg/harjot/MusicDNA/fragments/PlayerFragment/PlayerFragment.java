@@ -41,6 +41,10 @@ import android.widget.Toast;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.sdsmdg.harjot.MusicDNA.activities.HomeActivity;
 import com.sdsmdg.harjot.MusicDNA.clickitemtouchlistener.ClickItemTouchListener;
 import com.sdsmdg.harjot.MusicDNA.Config;
@@ -837,6 +841,8 @@ public class PlayerFragment extends Fragment implements
 
 
         cpb = (CustomProgressBar) view.findViewById(R.id.customProgress);
+        rlAds = (RelativeLayout) view.findViewById(R.id.rlAds);
+        setDisplayBanner();
 
         smallPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1143,6 +1149,69 @@ public class PlayerFragment extends Fragment implements
                     }
                 }, 500);
 
+    }
+
+
+
+    AdView mAdView;
+    RelativeLayout rlAds;
+    private void setDisplayBanner()
+    {
+
+
+        //String deviceid = tm.getDeviceId();
+
+        mAdView = new AdView(getActivity());
+        mAdView.setAdSize(AdSize.BANNER);
+        mAdView.setAdUnitId(Config.ADS_BNR_1);
+
+        // Add the AdView to the view hierarchy. The view will have no size
+        // until the ad is loaded.
+        rlAds.addView(mAdView);
+
+        // Create an ad request. Check logcat output for the hashed device ID to
+        // get test ads on a physical device.
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("88AA2259C43545CCDA7EE426C04BB233")
+                .build();
+        //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+        //.addTestDevice(deviceid).build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+                Log.i("Ads", "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+                Log.i("Ads", "onAdFailedToLoad");
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+                Log.i("Ads", "onAdOpened");
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+                Log.i("Ads", "onAdLeftApplication");
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+                Log.i("Ads", "onAdClosed");
+            }
+        });
     }
 
     public void addToFavourite() {

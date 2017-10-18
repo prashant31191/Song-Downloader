@@ -70,6 +70,11 @@ import android.view.HapticFeedbackConstants;
 
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardItem;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.gson.Gson;
 import com.lantouzi.wheelview.WheelView;
 import com.sdsmdg.harjot.MusicDNA.adapters.playlistdialogadapter.AddToPlaylistAdapter;
@@ -415,6 +420,8 @@ public class HomeActivity extends AppCompatActivity
     List<String> minuteList;
     Handler sleepHandler;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -727,6 +734,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 showFragment("local");
+                showRewardedVideo();
             }
         });
         streamViewAll = (TextView) findViewById(R.id.streamViewAll);
@@ -734,6 +742,7 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 showFragment("stream");
+                showRewardedVideo();
             }
         });
 
@@ -791,8 +800,88 @@ public class HomeActivity extends AppCompatActivity
 
         new loadSavedData().execute();
 
+        initVideoAds();
+
     }
 
+    private RewardedVideoAd mRewardedVideoAd;
+    String TAG = "===HomeActivity==";
+    boolean isClickEnable = false;
+    private void initVideoAds()
+    {
+        try{
+            Log.i(TAG, "====initVideoAds====");
+
+            // Initialize the Mobile Ads SDK.
+            MobileAds.initialize(this, Config.ADS_RVID_1);
+
+            mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+            mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+                @Override
+                public void onRewardedVideoAdLoaded() {
+                    Log.i(TAG, "====onRewardedVideoAdLoaded====");
+
+                    if (isClickEnable == false) {
+                        isClickEnable = true;
+                        showRewardedVideo();
+                    }
+                    loadRewardedVideoAd();
+                }
+
+                @Override
+                public void onRewardedVideoAdOpened() {
+                    Log.i(TAG, "====onRewardedVideoAdOpened====");
+                }
+
+                @Override
+                public void onRewardedVideoStarted() {
+                    Log.i(TAG, "====onRewardedVideoStarted====");
+                }
+
+                @Override
+                public void onRewardedVideoAdClosed() {
+                    Log.i(TAG, "====onRewardedVideoAdClosed====");
+                }
+
+                @Override
+                public void onRewarded(RewardItem rewardItem) {
+                    Log.i(TAG, "====onRewarded====");
+                }
+
+                @Override
+                public void onRewardedVideoAdLeftApplication() {
+                    Log.i(TAG, "====onRewardedVideoAdLeftApplication====");
+                }
+
+                @Override
+                public void onRewardedVideoAdFailedToLoad(int i) {
+                    Log.i(TAG, "====onRewardedVideoAdFailedToLoad====");
+                }
+            });
+
+            loadRewardedVideoAd();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void loadRewardedVideoAd() {
+        Log.i(TAG, "====loadRewardedVideoAd====");
+
+        if (mRewardedVideoAd !=null && !mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.loadAd(Config.ADS_RVID_1, new AdRequest.Builder().build());
+        }
+    }
+    private void showRewardedVideo() {
+        Log.i(TAG, "====showRewardedVideo====");
+
+        if (mRewardedVideoAd !=null && mRewardedVideoAd.isLoaded()) {
+            mRewardedVideoAd.show();
+        }
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -1893,10 +1982,12 @@ public class HomeActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             showFragment("settings");
+            showRewardedVideo();
             return true;
         }
         if (id == R.id.action_sleep) {
             showSleepDialog();
+            showRewardedVideo();
             return true;
         }
         return super.onOptionsItemSelected(item);

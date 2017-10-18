@@ -262,7 +262,16 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/reset_settings_card"
                 android:background="#232323" />
+            <RelativeLayout
+                android:layout_below="@+id/reset_settings_card"
+                android:id="@+id/rlAds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
+                android:minHeight="50dp"
+
+                android:gravity="center"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
 
     </ScrollView>
