@@ -1,4 +1,4 @@
-package com.sdsmdg.harjot.MusicDNA;
+package com.sdsmdg.harjot.AZMusic;
 
 import org.junit.Test;
 

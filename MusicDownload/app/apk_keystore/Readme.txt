@@ -1,13 +1,21 @@
-music_nda_keystore.jks
+azmusic_keystore.jks
 
-music_nda
+azmusic
 
 111111
 
 
 
 
-
+defaultConfig {
+        applicationId "com.sdsmdg.harjot.AZMusic"
+        minSdkVersion 21
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
+    }
 
 
 

@@ -6,7 +6,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.sdsmdg.harjot.MusicDNA"
+        applicationId "com.sdsmdg.harjot.AZMusic"
         minSdkVersion 21
         targetSdkVersion 21
         versionCode 1

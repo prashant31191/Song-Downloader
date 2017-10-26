@@ -1,6 +1,6 @@
 # MusicDNA - A Music Player like no other
 <img src = "https://github.com/harjot-oberai/MusicStreamer/blob/master/screenshots/splash.png" width = "800"><br><br>
-<a href='https://play.google.com/store/apps/details?id=com.sdsmdg.harjot.MusicDNA&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="200"/></a>
+<a href='https://play.google.com/store/apps/details?id=AZMusic&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="200"/></a>
 [<img src="https://f-droid.org/badge/get-it-on.png"
       alt="Get it on F-Droid"
       width="200">](https://android.izzysoft.de/repo/apk/com.sdsmdg.harjot.MusicDNA)<br>
@@ -20,7 +20,7 @@ The Player also packs a **Powerful Equalizer with** ***BassBoost and Reverb*** e
 After cloning the repo, create a file `Config.java` under `\app\src\main\java\com\sdsmdg\harjot\MusicDNA`
 Put the following code in it
 ```
-package com.sdsmdg.harjot.MusicDNA;
+package AZMusic;
 
 public class Config {
     public static final String CLIENT_ID = "YOUR_SOUNDCLOUD_CLIENT_ID";
